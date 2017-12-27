@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Demo Transit Routing App">
+    <meta name="author" content="Mark J. Headd">
+    <link rel="shortcut icon" href="">
+
+    <title>Transit Routing Demo</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+        crossorigin="anonymous">
+    <style>
+        body {
+            padding-top: 5rem;
+        }
+
+        #results {
+            margin-top: 20px;
+        }
+
+        .alert {
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .hide {
+            display: none;
+        }
+    </style>
+</head>
+
+<body role="document">
+
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+        <a class="navbar-brand" href="#">Home</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault"
+            aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </nav>
+
+    <main role="main" class="container">
+        <form>
+            <div class="form-group">
+                <label>Where are you leaving from?</label>
+                <input type="text" class="form-control" id="origin" placeholder="Enter address">
+            </div>
+            <div class="form-group">
+                <label>Where are you going to?</label>
+                <input type="text" class="form-control" id="destination" placeholder="Enter address">
+            </div>
+            <button type="submit" class="btn btn-primary" id="search">Get directions</button>
+        </form>
+        <div class="alert alert-secondary hide" role="alert">
+            Getign routing information...
+        </div>
+        <div id="results"></div>
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            $('#search').click(function () {
+                var origin = $('#origin').val();
+                var destination = $('#destination').val();
+                var url = '/directions?origin=' + origin + '&destination=' + destination;
+
+                requestJSON(url, function (json) {
+                    $("#results").append('<div class="card"><h4 class="card-title">Results</h4><pre>' + JSON.stringify(json, null, 2) + '</pre></card>');
+                });
+            });
+        });
+
+        function requestJSON(url, callback) {
+            $.ajax({
+                url: url,
+                beforeSend: function () {
+                    $('#results').empty();
+                    $('.alert-secondary').removeClass('hide');
+                },
+                complete: function (xhr) {
+                    $('.alert-secondary').addClass('hide');
+                    callback.call(null, xhr.responseJSON);
+                }
+            });
+        }
+
+    </script>
+
+</body>
+
+</html>

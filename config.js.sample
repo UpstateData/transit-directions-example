@@ -1,0 +1,8 @@
+exports.config = {
+    api_key : 'your-key-goes-here,
+    options: {
+        mode: 'transit',
+        transit_mode: ['bus'],
+        transit_routing_preference: 'fewer_transfers'
+    }
+}

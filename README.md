@@ -1,6 +1,6 @@
 # Transit Directions Example App
 
-A simple application that demonstrates how to use the Google Maps Direction API to get transit routing details.
+A simple application that demonstrates how to use the Google Maps Directions API to get transit routing details.
 
 ## Usage
 

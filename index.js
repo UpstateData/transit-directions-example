@@ -5,7 +5,7 @@ app.listen(port);
 
 const config = require('./config').config;
 
-// Create new Google Map API client.
+// Create new Google Maps API client.
 const googleMapsClient = require('@google/maps').createClient({
     key: config.api_key
 });

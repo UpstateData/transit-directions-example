@@ -4,7 +4,7 @@
   "description": "A simple API to return transit directions",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon index.js"
   },
   "author": "Mark J. Headd",
   "license": "ISC",

@@ -14,24 +14,7 @@
     <!-- Bootstrap core CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
         crossorigin="anonymous">
-    <style>
-        body {
-            padding-top: 5rem;
-        }
-
-        #results {
-            margin-top: 20px;
-        }
-
-        .alert {
-            margin-top: 10px;
-            text-align: center;
-        }
-
-        .hide {
-            display: none;
-        }
-    </style>
+        <link href="css/style.css" rel="stylesheet">
 </head>
 
 <body role="document">
@@ -57,7 +40,7 @@
             <button type="submit" class="btn btn-primary" id="search">Get directions</button>
         </form>
         <div class="alert alert-secondary hide" role="alert">
-            Getign routing information...
+            Looking up transit information...
         </div>
         <div id="results"></div>
     </main>
@@ -65,35 +48,7 @@
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
-    <script>
-        $(document).ready(function () {
-
-            $('#search').click(function () {
-                var origin = $('#origin').val();
-                var destination = $('#destination').val();
-                var url = '/directions?origin=' + origin + '&destination=' + destination;
-
-                requestJSON(url, function (json) {
-                    $("#results").append('<div class="card"><h4 class="card-title">Results</h4><pre>' + JSON.stringify(json, null, 2) + '</pre></card>');
-                });
-            });
-        });
-
-        function requestJSON(url, callback) {
-            $.ajax({
-                url: url,
-                beforeSend: function () {
-                    $('#results').empty();
-                    $('.alert-secondary').removeClass('hide');
-                },
-                complete: function (xhr) {
-                    $('.alert-secondary').addClass('hide');
-                    callback.call(null, xhr.responseJSON);
-                }
-            });
-        }
-
-    </script>
+    <script src="js/app.js"></script>
 
 </body>
 

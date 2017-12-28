@@ -1,16 +1,19 @@
 const express = require('express');
 const app = express();
+const port = process.argv[2] || 3000;
+app.listen(port);
 
 const config = require('./config').config;
+
+// Create new Google Map API client.
 const googleMapsClient = require('@google/maps').createClient({
     key: config.api_key
 });
 
-const port = process.argv[2] || 3000;
-app.listen(port);
-
+// Serve static assets.
 app.use(express.static('public'));
 
+// Route for transit directions lookup.
 app.get('/directions', (req, res) => {
     let options = config.options;
     options.origin = req.query.origin;

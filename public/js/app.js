@@ -1,6 +1,6 @@
 // Templates for constructing URLs and rendering results.
 var url_template = '/directions?origin=%origin%&destination=%destination%';
-var result_tempalte = '<div class="card"><h4 class="card-title">Raw Results</h4><pre>%results%</pre></card>';
+var result_template = '<div class="card"><h4 class="card-title">Raw Results</h4><pre>%results%</pre></card>';
 
 $(document).ready(function () {
 
@@ -13,7 +13,7 @@ $(document).ready(function () {
 
         // Append raw JSON results to <div>.
         requestJSON(url, function (json) {
-            $("#results").append(result_tempalte.replace('%results%', JSON.stringify(json, null, 2)));
+            $("#results").append(result_template.replace('%results%', JSON.stringify(json, null, 2)));
         });
     });
 });
